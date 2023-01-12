@@ -1,0 +1,16 @@
+{
+  "name": "programa-teste1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.3.1"
+  }
+}
