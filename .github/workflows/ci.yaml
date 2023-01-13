@@ -1,5 +1,8 @@
 name: ci-workflow-test
-on: [push]
+on:
+  pull_request:
+    branches:
+      - develop
 jobs:
   # nome que você dá pro job
   check-application:
