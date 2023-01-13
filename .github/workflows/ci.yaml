@@ -3,13 +3,13 @@ on:
   pull_request:
     branches:
       - develop
-strategy:
-  matrix:
-    version: [14, 16, 18]
 jobs:
   # nome que você dá pro job
   check-application:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [14, 16, 18]
     steps:
       # pega o que acabou de subir e adiciona nessa máquina ubuntu (git checkout)
       # actions/ é um repositório do gh chamado actions, estamos usando setups do gh nesse caso
