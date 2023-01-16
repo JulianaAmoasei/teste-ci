@@ -7,15 +7,29 @@ jobs:
   # nome que você dá pro job
   check-application:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version: [14, 16, 18]
+  # tiramos strategy pra não deixar pesado
     steps:
       # pega o que acabou de subir e adiciona nessa máquina ubuntu (git checkout)
       # actions/ é um repositório do gh chamado actions, estamos usando setups do gh nesse caso
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{matrix.version}}
+          #aqui deixou de ser array de versões e passou a ser uma única
+          node-version: 18
+      # name é uma pequena descrição, pode ou não usar
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push
+        # id serve pra pegar uma action e usar em outro step
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
+          tags: JulianaAmoasei/teste-ci:latest
       - run: npm test
       - run: npm start
